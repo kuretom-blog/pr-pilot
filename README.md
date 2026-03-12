@@ -1,71 +1,81 @@
 # pr-pilot
 
-A Claude Code plugin that streamlines your entire PR workflow — from code review to changelog generation, commit message drafting, and test gap analysis.
+PRワークフロー全体を支援する Claude Code プラグインです。コードレビュー、変更履歴の生成、コミットメッセージの作成、テスト不足の分析を提供します。
 
-## Skills
+## インストール
+```bash
+/plugin marketplace add Shin-sibainu/cc-company
+/plugin install company@cc-company
+```
 
-### `/review` — Code Review
-Analyzes diffs or code snippets across four dimensions:
-- **Readability** — naming, structure, clarity
-- **Performance** — inefficiencies, N+1 queries, unnecessary allocations
-- **Security** — injection, auth gaps, secret exposure
-- **Maintainability** — duplication, coupling, testability
+## スキル一覧
 
-Each issue is categorized by severity (Critical / Warning / Info) with concrete fix suggestions.
+### `/review` — コードレビュー
+差分やコードスニペットを4つの観点で分析します:
+- **可読性** — 命名、構造、明瞭さ
+- **パフォーマンス** — 非効率な処理、N+1クエリ、不要なアロケーション
+- **セキュリティ** — インジェクション、認証の漏れ、機密情報の露出
+- **保守性** — 重複コード、密結合、テスト容易性
 
-### `/changelog` — Changelog Generation
-Generates [Keep a Changelog](https://keepachangelog.com/) formatted entries from diffs or commit history. Automatically categorizes changes into Added, Changed, Fixed, Removed, Deprecated, and Security sections.
+各問題は重要度（Critical / Warning / Info）付きで、具体的な修正案とともに提示されます。
 
-### `/commit-msg` — Commit Message Drafting
-Drafts [Conventional Commits](https://www.conventionalcommits.org/) compliant messages with auto-detected type, scope, and breaking change identification. Provides up to 3 candidates to choose from.
+### `/changelog` — 変更履歴の生成
+差分やコミット履歴から [Keep a Changelog](https://keepachangelog.com/) 形式のエントリを自動生成します。Added、Changed、Fixed、Removed、Deprecated、Security に自動分類されます。
 
-### `/test-suggest` — Test Gap Analysis
-Identifies missing test cases for changed code, covering:
-- Normal paths and key use cases
-- Boundary values (null, empty, min/max)
-- Error paths and exception handling
-- Regression risks from the current change
+### `/commit-msg` — コミットメッセージの作成
+[Conventional Commits](https://www.conventionalcommits.org/) 準拠のコミットメッセージを作成します。type・scope の自動検出、破壊的変更の識別に対応し、最大3つの候補を提示します。
 
-Outputs ready-to-use test code matching your project's framework.
+### `/test-suggest` — テスト不足の分析
+変更されたコードに対して、不足しているテストケースを特定します:
+- 正常系 — 主要なユースケースのカバレッジ
+- 境界値 — null、空配列、最大値/最小値
+- 異常系 — 例外処理、エラーレスポンス
+- 回帰テスト — 今回の変更で壊れうる既存機能
 
-## Installation
+プロジェクトのテストフレームワークに合わせた、すぐに使えるテストコードを出力します。
+
+## インストール
 
 ```bash
 claude plugin add kuretom-blog/pr-pilot
 ```
 
-## Usage Examples
+## 使い方
 
 ```bash
-# Review staged changes
-/review $(git diff --cached)
+# ステージされた変更をレビュー（引数なしで自動取得）
+/review
 
-# Generate changelog for recent commits
-/changelog $(git log --oneline -10)
+# 直近のコミットから変更履歴を生成
+/changelog
 
-# Draft a commit message from staged diff
-/commit-msg $(git diff --cached)
+# ステージされた差分からコミットメッセージを作成
+/commit-msg
 
-# Suggest tests for changed files
-/test-suggest $(git diff main)
+# 変更ファイルに対するテストを提案
+/test-suggest
+
+# 明示的に差分を渡すことも可能
+/review $(git diff main)
+/changelog $(git log --oneline v1.0..HEAD)
 ```
 
-## Project Structure
+## プロジェクト構成
 
 ```
 .claude-plugin/
-  plugin.json            # Plugin metadata
+  plugin.json            # プラグインのメタデータ
 skills/
-  review/SKILL.md        # Code review skill
-  changelog/SKILL.md     # Changelog generation skill
-  commit-msg/SKILL.md    # Commit message drafting skill
-  test-suggest/SKILL.md  # Test suggestion skill
+  review/SKILL.md        # コードレビュースキル
+  changelog/SKILL.md     # 変更履歴生成スキル
+  commit-msg/SKILL.md    # コミットメッセージ作成スキル
+  test-suggest/SKILL.md  # テスト提案スキル
 ```
 
-## License
+## ライセンス
 
-MIT License. See [LICENSE](LICENSE) for details.
+MIT License。詳細は [LICENSE](LICENSE) を参照してください。
 
-## Author
+## 作者
 
 kuretom

@@ -21,6 +21,12 @@ description: Suggest missing test cases for changed code including edge cases, e
 
 ## 入力
 $ARGUMENTS
+
+引数が空または未指定の場合は、以下の順序で自動取得してください:
+1. `git diff --cached` を実行してステージ済みの差分を取得
+2. ステージ済みの差分がなければ `git diff` でワーキングツリーの差分を取得
+3. どちらも空の場合はユーザーに差分またはコードを渡すよう案内する
+
 - diff: 差分テキストまたはコード
 - framework: テストフレームワーク指定（省略可、自動検出）
 - language: 言語指定（省略可、自動検出）

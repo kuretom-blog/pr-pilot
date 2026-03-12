@@ -34,5 +34,11 @@ description: Generate a structured changelog entry from git diffs or commit hist
 
 ## 入力
 $ARGUMENTS
+
+引数が空または未指定の場合は、以下の順序で自動取得してください:
+1. `git log --oneline -10` を実行して直近のコミット履歴を取得
+2. コミット履歴が空の場合は `git diff --cached`、それも空なら `git diff` で差分を取得
+3. どちらも空の場合はユーザーに差分またはコミットログを渡すよう案内する
+
 - diff: 差分テキストまたはコミットログ
 - version: バージョン番号（省略時は Unreleased）
