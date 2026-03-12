@@ -1,0 +1,7 @@
+{
+  "name": "my-first-plugin",
+  "description": "Automated PR review suggestions (readability, perf, security)",
+  "version": "1.0.0",
+  "author": { "name": "kuretom" },
+  "homepage": "https://github.com/kuretom-blog/my-first-plugin"
+}
