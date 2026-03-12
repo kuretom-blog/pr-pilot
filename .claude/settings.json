@@ -1,6 +1,5 @@
 {
   "enabledPlugins": {
-    "pr-pilot@pr-pilot": true,
-    "superpowers@claude-plugins-official": true
+    "pr-pilot@pr-pilot": true
   }
 }
